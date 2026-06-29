@@ -13,6 +13,7 @@ from backend.models import AnalyzeResponse, JobStatusResponse, SubtitleTrack
 from backend.dynamo import get_subtitles, put_subtitles, create_job, get_job, update_job
 from backend.gemini import analyze_video
 from backend.storage import upload_to_s3, download_from_s3, delete_from_s3
+from backend.storage import upload_to_s3, download_from_s3, generate_presigned_url
 
 
 def normalize_youtube_url(url: str) -> str:
@@ -54,14 +55,11 @@ async def process_video(
         )
 
         put_subtitles(track, ttl=ttl)
-        update_job(job_id, "done", subtitle_track=track)
-
-        if is_s3:
-            delete_from_s3(video_uri)
+        update_job(job_id, "done", subtitle_track=track, s3_uri=video_uri if is_s3 else None)
 
     except Exception as e:
         update_job(job_id, "failed", error=str(e))
-
+        
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -149,3 +147,14 @@ def get_cached_subtitles(video_id: str):
     if not track:
         raise HTTPException(status_code=404, detail="No subtitles found for this video")
     return track
+
+
+@app.get("/api/video/{job_id}")
+def get_video_url(job_id: str):
+    job = get_job(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    s3_uri = job.get("s3_uri")
+    if not s3_uri:
+        raise HTTPException(status_code=404, detail="No uploaded video for this job")
+    return {"url": generate_presigned_url(s3_uri)}

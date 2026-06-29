@@ -33,3 +33,12 @@ def delete_from_s3(s3_uri: str) -> None:
     """Delete object after Gemini is done with it."""
     key = s3_uri.removeprefix(f"s3://{settings.s3_bucket}/")
     s3.delete_object(Bucket=settings.s3_bucket, Key=key)
+
+
+def generate_presigned_url(s3_uri: str, expiry: int = 60*60*24*30) -> str:
+    key = s3_uri.removeprefix(f"s3://{settings.s3_bucket}/")
+    return s3.generate_presigned_url(
+        "get_object",
+        Params={"Bucket": settings.s3_bucket, "Key": key},
+        ExpiresIn=expiry,
+    )

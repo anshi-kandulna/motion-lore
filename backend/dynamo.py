@@ -54,20 +54,19 @@ def get_job(job_id: str) -> Optional[dict]:
     return response.get("Item")
 
 
-def update_job(job_id: str, status: str, subtitle_track: Optional[SubtitleTrack] = None, error: Optional[str] = None) -> None:
+def update_job(job_id: str, status: str, subtitle_track=None, error=None, s3_uri=None):
     expr = "SET #s = :s, updated_at = :t"
     names = {"#s": "status"}
-    values = {
-        ":s": status,
-        ":t": datetime.now(timezone.utc).isoformat(),
-    }
+    values = {":s": status, ":t": datetime.now(timezone.utc).isoformat()}
     if subtitle_track:
         expr += ", subtitle_track = :st"
         values[":st"] = subtitle_track.model_dump_json()
     if error:
         expr += ", error_msg = :e"
         values[":e"] = error
-
+    if s3_uri:
+        expr += ", s3_uri = :u"
+        values[":u"] = s3_uri
     jobs_table.update_item(
         Key={"job_id": job_id},
         UpdateExpression=expr,
