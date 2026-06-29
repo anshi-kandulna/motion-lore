@@ -37,7 +37,15 @@ export default function LandingPage() {
           setLoading(false)
           return
         }
-        formData.append('video_url', url.trim())
+        let targetUrl = url.trim()
+        if (targetUrl.includes('/shorts/')) {
+          const parts = targetUrl.split('/shorts/')
+          const videoId = parts[parts.length - 1].split(/[?#]/)[0]
+          if (videoId.length === 11) {
+            targetUrl = `https://www.youtube.com/watch?v=${videoId}`
+          }
+        }
+        formData.append('video_url', targetUrl)
       } else {
         const file = fileRef.current?.files?.[0]
         if (!file) {
