@@ -1,7 +1,7 @@
 # groq_utils.py
 import json
 from groq import Groq
-from config import settings
+from backend.config import settings
 
 client = Groq(api_key=settings.groq_api_key)
 

@@ -1,6 +1,6 @@
 import uuid
 import boto3
-from config import settings
+from backend.config import settings
 
 s3 = boto3.client(
     "s3",
