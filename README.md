@@ -1,6 +1,7 @@
-<div align="center" style="margin: 0; padding: 0;">
-  <img src="frontend/public/assets/ballet-dancer.png" width="260" style="margin: 0; padding: 0; display: block;" alt="Motion Lore Logo" />
-</div>
+<p align="center">
+  <img src="frontend/public/assets/ballet-dancer.png" width="140" alt="Motion Lore Logo" />
+</p>
+
 <h1 align="center">Motion Lore</h1>
 <p align="center"><strong>AI-Powered Ballet Subtitle Generator</strong></p>
 
