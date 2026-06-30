@@ -1,4 +1,21 @@
-# Motion Lore: AI-Powered Ballet Subtitle Generator
+<p align="center">
+  <img src="frontend/public/assets/ballet-dancer.png" width="140" alt="Motion Lore Logo" />
+</p>
+
+<h1 align="center">Motion Lore</h1>
+<p align="center"><strong>AI-Powered Ballet Subtitle Generator</strong></p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="Python" />
+  <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white" alt="Amazon AWS" />
+  <img src="https://img.shields.io/badge/Gemini-8E75C2?style=for-the-badge&logo=google&logoColor=white" alt="Google Gemini" />
+</p>
+
+---
 
 Motion Lore is an intelligent, context-aware subtitle generator designed specifically for ballet performances. By leveraging advanced multimodal AI models, the application analyzes video recordings of ballet and translates non-verbal gestures, pantomime, dramatic expressions, and musical stages into structured narrative subtitles.
 
